@@ -352,9 +352,12 @@ def payu_check():
     # Process the check
     result = run_check(cc_info)
     
-    # Return response
+    # Format full card with original format
+    full_card = f"{cc_info['number']}|{cc_info['month']}|{cc_info['year']}|{cc_info['cvv']}"
+    
+    # Return response with full card
     return jsonify({
-        "Card": result.get('card'),
+        "Card": full_card,
         "Status": result.get('status'),
         "Message": result.get('message')
     })
